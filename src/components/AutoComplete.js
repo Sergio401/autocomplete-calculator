@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import Autosuggest from "react-autosuggest";
-import {
-  TextField,
-  Box,
-  ListItemButton,
-  Container,
-} from "@mui/material";
+import AutosuggestInput from "./AutosuggestInput";
+import {Box} from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { Operators } from "./Operators";
 import { getItem, getSuggestions } from "../helpers/data";
@@ -56,62 +51,35 @@ const AutocompleteCalculator = () => {
   };
 
   return (
-    <Box sx={{ width: "500px", margin: "0 auto", paddingTop: "20px" }}>
-      <Autosuggest
-        suggestions={[]}
-        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={onSuggestionsClearRequested}
-        onSuggestionSelected={(e, props) => onSuggestionSelected(e, props)}
-        getSuggestionValue={(suggestion) => suggestion.name}
-        focusInputOnSuggestionClick={true}
-        renderSuggestion={(suggestion) => (
-          <ListItemButton
-            style={{
-              textDecoration: "none",
-              cursor: "pointer",
-            }}
-          >
-            {suggestion.name}
-          </ListItemButton>
-        )}
-        inputProps={inputProps}
-        renderInputComponent={(inputProps) => (
-          <TextField
-            {...inputProps}
-            variant="outlined"
-            fullWidth
-            multiline
-            size="medium"
+    <Box sx={{ margin: "0 auto", paddingTop: "20px", display: "flex", flexDirection: "column", alignItems: "center" }}>
+      
+      <Grid container spacing={16}>
+        <Grid item xs={6}>
+          <CountersList handleCounterClick={handleCounterOrOperatorClick} />
+        </Grid>
+        <Grid item xs={6}>
+          <Grid item xs={12}>
+          <AutosuggestInput
+            suggestions={suggestions}
+            onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={onSuggestionsClearRequested}
+            onSuggestionSelected={(e, props) => onSuggestionSelected(e, props)}
+            inputProps={inputProps}
           />
-        )}
-        renderSuggestionsContainer={({ containerProps, children, query }) => (
-          <Container
-            maxWidth="sm"
-            {...containerProps}
-            style={{
-              marginBottom: "8px",
-            }}
-          >
-            {children}
-          </Container>
-        )}
-      />
-
-      {suggestions.length > 0 && (
-        <SuggestionsTreeView
-          onSuggestionSelected={onSuggestionSelected}
-          suggestions={suggestions}
-        />
-      )}
-
-      <Grid container spacing={2}>
-        <Grid item size={{ xs: 8, md: 8 }}>
-          <Grid container spacing={2}>
-            <Operators handleOperatorClick={handleCounterOrOperatorClick} />
-            <Functions handleFunctionClick={handleFunctionClick}/>
+          </Grid>
+          <Grid item xs={12}>
+            {suggestions.length > 0 && (
+                <SuggestionsTreeView
+                  onSuggestionSelected={onSuggestionSelected}
+                  suggestions={suggestions}
+                />
+            )}  
+            <div style={{display: "flex", marginTop: "50px"}}>
+              <Operators handleOperatorClick={handleCounterOrOperatorClick} />
+            </div>
+              <Functions handleFunctionClick={handleFunctionClick}/>
           </Grid>
         </Grid>
-        <CountersList handleCounterClick={handleCounterOrOperatorClick} />
       </Grid>
     </Box>
   );

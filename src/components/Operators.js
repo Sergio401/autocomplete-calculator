@@ -1,40 +1,52 @@
 import React from "react";
-import {
-    Button
-  } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import { Button } from "@mui/material";
 
-const operatorsList = ["+", "-", "*", "/", "(", ")", "=", "^"];
+
+const operatorsListFirstRow = ["+", "-", "*", "/"];
+const operatorsListSecondRow = ["(", ")", "=", "^"];
 
 export const Operators = (props) => {
 
   const { handleOperatorClick } = props;
 
   return (
-    <>
-      {operatorsList.map((operator) => (
-        <Grid
-          item
-          size={{ xs: 1, md: 8 }}
-          key={operator}
-          style={{
-            marginTop: "16px",
-          }}
-        >
-          <Button
-            variant="contained"
-            fullWidth
-            onClick={() => handleOperatorClick(operator)}
-            style={{
-              backgroundColor: "#1976d2",
-              color: "white",
-              fontWeight: "bold",
-            }}
-          >
-            {operator}
-          </Button>
-        </Grid>
-      ))}
+    <>  
+     <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+       <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+         {operatorsListFirstRow.map((operator) => (
+           <Button
+             key={operator}
+             variant="contained"
+             onClick={() => handleOperatorClick(operator)}
+             style={{
+               backgroundColor: "#1976d2",
+               color: "white",
+               fontWeight: "bold",
+               margin: "5px"
+             }}
+           >
+             {operator}
+           </Button>
+         ))}
+       </div>
+       <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+         {operatorsListSecondRow.map((operator) => (
+           <Button
+             key={operator}
+             variant="contained"
+             onClick={() => handleOperatorClick(operator)}
+             style={{
+               backgroundColor: "#1976d2",
+               color: "white",
+               fontWeight: "bold",
+               margin: "5px"
+             }}
+           >
+             {operator}
+           </Button>
+         ))}
+       </div>
+     </div>
     </>
   );
 };

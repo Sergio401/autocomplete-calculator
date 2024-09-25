@@ -7,8 +7,8 @@ import { suggestionsList } from "../helpers/data";
 export const CountersList = (props) => {
   const { handleCounterClick } = props;
   return (
-    <Grid item size={{ xs: 4, md: 4 }}>
-      <Stack container spacing={4}>
+    <Grid item>
+      <Stack container >
         {suggestionsList["Counters"].map((counter) => (
           <Grid
             key={counter.id}
