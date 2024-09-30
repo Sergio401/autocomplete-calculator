@@ -5,9 +5,13 @@ import { Button } from "@mui/material";
 const operatorsListFirstRow = ["+", "-", "*", "/"];
 const operatorsListSecondRow = ["(", ")", "=", "^"];
 
-export const Operators = (props) => {
+export const Operators = props => {
 
   const { handleOperatorClick } = props;
+
+  const selectedAnOption = event => {
+    handleOperatorClick(event.target.value)
+  }
 
   return (
     <>  
@@ -17,7 +21,8 @@ export const Operators = (props) => {
            <Button
              key={operator}
              variant="contained"
-             onClick={() => handleOperatorClick(operator)}
+             onClick={selectedAnOption}
+             value={operator}
              style={{
                backgroundColor: "#1976d2",
                color: "white",
@@ -34,7 +39,8 @@ export const Operators = (props) => {
            <Button
              key={operator}
              variant="contained"
-             onClick={() => handleOperatorClick(operator)}
+             onClick={selectedAnOption} 
+             value={operator}
              style={{
                backgroundColor: "#1976d2",
                color: "white",

@@ -1,15 +1,15 @@
 // Lista de sugerencias
 export const suggestionsList = {
     Functions: [
-      { id: 31, name: "if", value: "if ( " },
-      { id: 21, name: "else", value: "else { " },
-      { id: 33, name: "min", value: "min ( " },
-      { id: 4, name: "max", value: "max ( " },
-      { id: 5, name: "sqrt", value: "sqrt( " },
+      { id: 31, name: "if", value: "if" },
+      { id: 21, name: "else", value: "else" },
+      { id: 33, name: "min", value: "min" },
+      { id: 4, name: "max", value: "max" },
+      { id: 5, name: "sqrt", value: "sqrt" },
     ],
     Constants: [
-      { id: 6, name: "pi", value: "pi( " },
-      { id: 7, name: "e", value: "e( " },
+      { id: 6, name: "pi", value: "pi" },
+      { id: 7, name: "e", value: "e" },
     ],
     Counters: [
       { id: 64424509457, name: "GW_outgoing_downlink_user_traffic_in_KB_APNS", value: "GW_outgoing_downlink_user_traffic_in_KB_APNS " },

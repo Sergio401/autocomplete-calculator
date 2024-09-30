@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useCallback } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 
 const EditorFormula = ({ value, onChange, editorRef }) => {
-  
-  const handleChange = (value, viewUpdate) => {
+  const handleChange = (value) => {
     onChange(value);
-    if (editorRef) {
-      editorRef.current = viewUpdate.view;
-    }
   };
+
+  const referenceInitialization = useCallback((view) => {
+    if (editorRef) {
+      editorRef.current = view;
+    }
+  }, [editorRef]);
 
   return (
     <CodeMirror
@@ -17,6 +19,7 @@ const EditorFormula = ({ value, onChange, editorRef }) => {
       placeholder="Type your formula here"
       value={value}
       onChange={handleChange}
+      onCreateEditor={referenceInitialization}
     />
   );
 };

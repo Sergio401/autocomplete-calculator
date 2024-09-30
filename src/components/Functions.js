@@ -3,13 +3,17 @@ import MenuItem from "@mui/material/MenuItem";
 import { suggestionsList } from "../helpers/data";
 import Grid from "@mui/material/Grid2";
 
-export const Functions = (props) => {
+export const Functions = props => {
   const { handleFunctionClick } = props;
+
+  const selectedAnOption = event => {
+    handleFunctionClick(event.target.value)
+  }
+
   return (
     <Grid
       item
       size={{ xs: 12, md: 12 }}
-      key={"4654654"}
       style={{
         marginTop: "16px",
       }}
@@ -18,10 +22,10 @@ export const Functions = (props) => {
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         label="Function"
-        onChange={(value) => handleFunctionClick(value)}
+        onChange={selectedAnOption}
       >
-        {suggestionsList["Functions"].map((func) => (
-          <MenuItem value={func.value}>{func.name}</MenuItem>
+        {suggestionsList["Functions"].map((functionItem) => (
+          <MenuItem key={functionItem.id} value={functionItem.value}>{functionItem.name}</MenuItem>
         ))}
       </Select>
     </Grid>

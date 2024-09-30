@@ -36,7 +36,7 @@ const AutosuggestInput = ({
           size="medium"
         />
       )}
-      renderSuggestionsContainer={({ containerProps, children, query }) => (
+      renderSuggestionsContainer={({ containerProps, children }) => (
         <Container
           maxWidth="sm"
           {...containerProps}

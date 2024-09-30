@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {Box} from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { Operators } from "./Operators";
@@ -7,6 +7,7 @@ import { CountersList } from "./CountersList";
 import {Functions} from "./Functions"
 import { SuggestionsTreeView } from "./SuggestionsTreeView";
 import EditorFormula from "./EditorFormula";
+import { updateEditorState } from "../helpers/tools";
 
 
 const AutocompleteCalculator = () => {
@@ -14,25 +15,12 @@ const AutocompleteCalculator = () => {
   const [suggestions, setSuggestions] = useState([]);
   const editorRef = useRef(null);
 
+  const selectedAClickableItem = item => {
+    updateEditorState(item, editorRef.current);
+  };
+  
   const onSuggestionSelected = (index) => {
     console.log("TO DO")
-  };
-
-  const handleCounterOrOperatorClick = (counterOrOperator) => {
-    if (editorRef.current) {
-      const editor = editorRef.current;
-      const { from, to } = editor.state.selection.main;
-      const insertText = counterOrOperator + '';
-      editor.dispatch({
-        changes: { from, to, insert: insertText },
-        selection: { anchor: from + insertText.length }
-      });
-      editor.focus();
-    }
-  };
-
-  const handleFunctionClick = (event) => {
-    setInputValue(inputValue + event.target.value);
   };
 
   return (
@@ -40,7 +28,7 @@ const AutocompleteCalculator = () => {
       
       <Grid container spacing={16}>
         <Grid item xs={6}>
-          <CountersList handleCounterClick={handleCounterOrOperatorClick} />
+          <CountersList handleCounterClick={selectedAClickableItem} />
         </Grid>
         <Grid item xs={6}>
           <Grid item xs={12}>
@@ -57,10 +45,11 @@ const AutocompleteCalculator = () => {
                   suggestions={suggestions}
                 />
             )}  
-            <div style={{display: "flex", marginTop: "50px"}}>
-              <Operators handleOperatorClick={handleCounterOrOperatorClick} />
+            <div style={{display: "flex", marginTop: "50px", gap: "50px"}}>
+              <Operators handleOperatorClick={selectedAClickableItem} />
+              <Functions handleFunctionClick={selectedAClickableItem}/>
             </div>
-              <Functions handleFunctionClick={handleFunctionClick}/>
+              
           </Grid>
         </Grid>
       </Grid>
