@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import AutosuggestInput from "./AutosuggestInput";
+import React, { useState, useRef } from "react";
 import {Box} from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { Operators } from "./Operators";
@@ -7,47 +6,33 @@ import { getItem, getSuggestions } from "../helpers/data";
 import { CountersList } from "./CountersList";
 import {Functions} from "./Functions"
 import { SuggestionsTreeView } from "./SuggestionsTreeView";
+import EditorFormula from "./EditorFormula";
+
 
 const AutocompleteCalculator = () => {
   const [inputValue, setInputValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-
-  const onSuggestionsFetchRequested = ({ value }) => {
-    setSuggestions(getSuggestions(value));
-  };
-
-  const onSuggestionsClearRequested = () => {
-    return;
-  };
+  const editorRef = useRef(null);
 
   const onSuggestionSelected = (index) => {
-    const item = getItem(index);
-    setInputValue((value) => {
-      const indexSpace = inputValue.lastIndexOf(" ");
-      return item
-        ? inputValue.substring(0, indexSpace + 1) + item.value
-        : inputValue;
-    });
-    setSuggestions([]);
+    console.log("TO DO")
   };
 
-  const handleInputChange = (event, { newValue }) => {
-    setInputValue(newValue);
-  };
-
-  const handleCounterOrOperatorClick = (operator) => {
-    setInputValue(inputValue + operator);
+  const handleCounterOrOperatorClick = (counterOrOperator) => {
+    if (editorRef.current) {
+      const editor = editorRef.current;
+      const { from, to } = editor.state.selection.main;
+      const insertText = counterOrOperator + '';
+      editor.dispatch({
+        changes: { from, to, insert: insertText },
+        selection: { anchor: from + insertText.length }
+      });
+      editor.focus();
+    }
   };
 
   const handleFunctionClick = (event) => {
     setInputValue(inputValue + event.target.value);
-  };
-
-  const inputProps = {
-    placeholder: "Type something...",
-    value: inputValue,
-    onChange: handleInputChange,
-    style: { width: "100%" }
   };
 
   return (
@@ -59,12 +44,10 @@ const AutocompleteCalculator = () => {
         </Grid>
         <Grid item xs={6}>
           <Grid item xs={12}>
-          <AutosuggestInput
-            suggestions={suggestions}
-            onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={onSuggestionsClearRequested}
-            onSuggestionSelected={(e, props) => onSuggestionSelected(e, props)}
-            inputProps={inputProps}
+          <EditorFormula 
+            value = {inputValue}
+            onChange={setInputValue}
+            editorRef={editorRef}
           />
           </Grid>
           <Grid item xs={12}>
