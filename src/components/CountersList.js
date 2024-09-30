@@ -17,6 +17,9 @@ export const CountersList = (props) => {
             }}
           >
             <Button
+              style={{
+                justifyContent: "left",
+              }}
               variant="outlined"
               fullWidth
               onClick={() => handleCounterClick(counter.value)}

@@ -47,7 +47,7 @@ const AutocompleteCalculator = () => {
     placeholder: "Type something...",
     value: inputValue,
     onChange: handleInputChange,
-    style: { width: "100%" }, // Estilo adicional para margen
+    style: { width: "100%" }
   };
 
   return (
