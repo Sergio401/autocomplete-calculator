@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 
-const EditorFormula = ({ value, onChange, editorRef }) => {
+const EditorFormula = ({ value, onChange, editorRef, extensions }) => {
   const handleChange = (value) => {
     onChange(value);
   };
@@ -20,6 +20,7 @@ const EditorFormula = ({ value, onChange, editorRef }) => {
       value={value}
       onChange={handleChange}
       onCreateEditor={referenceInitialization}
+      extensions={extensions}
     />
   );
 };

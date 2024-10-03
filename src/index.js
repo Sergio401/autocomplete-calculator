@@ -1,13 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-import AutocompleteInput from "./components/AutoComplete";
+import FormulaBuilder from "./components/FormulaBuilder";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
 root.render(
   <StrictMode>
-    <AutocompleteInput />
+    <FormulaBuilder />
   </StrictMode>
 );

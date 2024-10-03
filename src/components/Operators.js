@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 
 const operatorsListFirstRow = ["+", "-", "*", "/"];
 const operatorsListSecondRow = ["(", ")", "=", "^"];
+export const operatorsList = [...operatorsListFirstRow, ...operatorsListSecondRow];
 
 export const Operators = props => {
 

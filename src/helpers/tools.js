@@ -1,3 +1,4 @@
+import { keywords } from "./data";
 
 export const updateEditorState = (item, editorRef) => {
     const insertText = item + '';
@@ -10,3 +11,18 @@ export const updateEditorState = (item, editorRef) => {
     });
     editor.focus();
 }
+
+export const getSuggestions = keywords => context => {
+    let word = context.matchBefore(/\w*/);
+    if (!word || word.from === word.to) return null;
+  
+    return {
+      from: word.from,
+      to: word.to,
+      options: keywords.map(word => ({
+        label: word,
+        type: "keyword"
+      })),
+      validFor: /^\w*$/,
+    };
+  };

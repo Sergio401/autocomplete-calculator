@@ -23,6 +23,7 @@ export const Functions = props => {
         id="demo-simple-select"
         label="Function"
         onChange={selectedAnOption}
+        displayEmpty
       >
         {suggestionsList["Functions"].map((functionItem) => (
           <MenuItem key={functionItem.id} value={functionItem.value}>{functionItem.name}</MenuItem>
